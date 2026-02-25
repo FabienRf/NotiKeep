@@ -26,7 +26,7 @@
         </activity>
 
         <service
-            android:name=".NotiKeep"
+            android:name=".service.NotificationService"
             android:exported="false"
             android:foregroundServiceType="dataSync" />
     </application>

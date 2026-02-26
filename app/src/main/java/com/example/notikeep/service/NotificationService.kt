@@ -24,8 +24,10 @@ class NotificationService : Service() {
         val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(message)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setOngoing(true)
+            .setOnlyAlertOnce(true)
+            .setCategory(NotificationCompat.CATEGORY_SERVICE)
             .build()
 
         startForeground(1, notification)
@@ -33,6 +35,11 @@ class NotificationService : Service() {
     }
 
     override fun onBind(p0: Intent?): IBinder? = null
+
+    override fun onDestroy() {
+        stopForeground(STOP_FOREGROUND_REMOVE)
+        super.onDestroy()
+    }
 
     private fun createNotificationChannel(){
         val channel = NotificationChannel(
